@@ -6,7 +6,6 @@ e modelos LLM hospedados pela Groq.
 O sistema utiliza um prompt especializado em saúde da mulher,
 permitindo respostas contextualizadas e seguras.
 
-
 Funcionalidades implementadas:
 - memória contextual
 - controle de histórico

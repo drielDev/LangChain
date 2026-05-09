@@ -4,6 +4,7 @@ from langchain_core.messages import (
     HumanMessage,
     AIMessage
 )
+from pathlib import Path
 
 from .config import (
     GROQ_API_KEY,
@@ -13,6 +14,9 @@ from .config import (
 )
 
 from .prompt import SYSTEM_PROMPT
+
+
+LOG_FILE = Path(__file__).with_name("logs.txt")
 
 
 # =========================
@@ -33,6 +37,18 @@ llm = ChatGroq(
 conversation_history = [
     SystemMessage(content=SYSTEM_PROMPT)
 ]
+
+
+def _trim_history() -> None:
+    if not isinstance(MAX_HISTORY, int) or MAX_HISTORY <= 0:
+        return
+
+    # 1 SystemMessage + (MAX_HISTORY * 2) messages (Human + AI per turn)
+    max_messages = 1 + (MAX_HISTORY * 2)
+    if len(conversation_history) <= max_messages:
+        return
+
+    conversation_history[:] = [conversation_history[0]] + conversation_history[-(max_messages - 1):]
 
 
 # =========================
@@ -60,8 +76,10 @@ def generate_response(user_input: str) -> str:
         conversation_history.append(
             AIMessage(content=response.content)
         )
+
+        _trim_history()
         
-        with open("logs.txt", "a", encoding="utf-8") as log_file:
+        with LOG_FILE.open("a", encoding="utf-8") as log_file:
             log_file.write(f"USER: {user_input}\n")
             log_file.write(f"BOT: {response.content}\n\n")
             

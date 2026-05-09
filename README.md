@@ -34,3 +34,25 @@ Reinicia o histórico da conversa.
 
 ```bash
 pip install -r requirements.txt
+```
+
+Crie um arquivo `.env` com sua chave:
+
+```
+GROQ_API_KEY=sua_chave_aqui
+```
+
+Exemplo rápido de uso (interface esperada para integração):
+
+```python
+from src.langchain_assistant import generate_response, reset_conversation
+
+print(generate_response("Estou com dores menstruais intensas."))
+reset_conversation()
+```
+
+Para rodar um exemplo interativo:
+
+```bash
+python integration_example.py
+```
