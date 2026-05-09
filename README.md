@@ -20,6 +20,12 @@ GROQ_API_KEY=sua_chave_aqui
 python integration_example.py
 ```
 
+Rodar a interface (Streamlit):
+
+```bash
+streamlit run app.py
+```
+
 Opcional (smoke test):
 
 ```bash
@@ -28,11 +34,27 @@ python -m langchain_assistant.test_assistant
 
 ## Integrar no projeto principal 
 
-1) Copie a pasta `langchain_assistant/` para a raiz do projeto principal.
+O jeito mais simples é literalmente copiar estes itens para a raiz do projeto principal:
 
-2) Instale as dependências (use o seu `requirements.txt` ou mescle no do projeto principal).
+- `langchain_assistant/`
+- `app.py`
+- `requirements.txt`
 
-3) Garanta `GROQ_API_KEY` no ambiente.
+Depois:
+
+1) Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+2) Garanta `GROQ_API_KEY` no ambiente.
+
+3) (Opcional) Suba a UI:
+
+```bash
+streamlit run app.py
+```
 
 Uso recomendado (1 sessão por usuário/fluxo):
 
