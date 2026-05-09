@@ -1,58 +1,47 @@
-# Assistente Médico com LangChain
+# Assistente (LangChain)
 
-## Descrição
+## Executar localmente
 
-Módulo responsável pela geração de respostas utilizando LangChain e modelos LLM da Groq.
-
-## Funcionalidades
-
-- geração de respostas contextualizadas
-- memória de conversa
-- reset de histórico
-- logs simples
-- prompt especializado em saúde da mulher
-
-## Estrutura
-
-src/langchain_assistant/
-
-## Funções principais
-
-### generate_response(user_input)
-
-Recebe uma string e retorna uma resposta gerada pelo modelo.
-
-### reset_conversation()
-
-Reinicia o histórico da conversa.
-
-## Como executar
-
-1. Criar .env
-2. Adicionar GROQ_API_KEY
-3. Instalar dependências
+1) Instale as dependências:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Crie um arquivo `.env` com sua chave:
+2) Configure a variável de ambiente:
 
-```
+```text
 GROQ_API_KEY=sua_chave_aqui
 ```
 
-Exemplo rápido de uso (interface esperada para integração):
-
-```python
-from src.langchain_assistant import generate_response, reset_conversation
-
-print(generate_response("Estou com dores menstruais intensas."))
-reset_conversation()
-```
-
-Para rodar um exemplo interativo:
+3) Rode um exemplo:
 
 ```bash
 python integration_example.py
+```
+
+Opcional (smoke test):
+
+```bash
+python -m langchain_assistant.test_assistant
+```
+
+## Integrar no projeto principal 
+
+1) Copie a pasta `langchain_assistant/` para a raiz do projeto principal.
+
+2) Instale as dependências (use o seu `requirements.txt` ou mescle no do projeto principal).
+
+3) Garanta `GROQ_API_KEY` no ambiente.
+
+Uso recomendado (1 sessão por usuário/fluxo):
+
+```python
+from langchain_assistant import AssistantSession
+
+session = AssistantSession()
+texto = session.generate_response("Olá")
+
+# Para pipelines (LangGraph/validação) que preferem exceção em vez de string de erro:
+texto = session.generate_response("...", raise_on_error=True)
 ```

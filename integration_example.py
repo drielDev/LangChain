@@ -1,4 +1,4 @@
-from src.langchain_assistant import (
+from langchain_assistant import (
     generate_response,
     reset_conversation
 )

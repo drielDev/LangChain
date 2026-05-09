@@ -4,7 +4,7 @@ from .assistant import generate_response
 questions = [
     "Estou com dores menstruais intensas.",
     "Isso pode durar quantos dias?",
-    "Quando devo procurar um médico?"
+    "Quando devo procurar um médico?",
 ]
 
 
